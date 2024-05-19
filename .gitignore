@@ -1,2 +1,4 @@
 VE_cold/
 .env
+__pycache__/
+seller_data_unique.xlsx
