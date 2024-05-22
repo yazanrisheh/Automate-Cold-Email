@@ -2,3 +2,5 @@ VE_cold/
 .env
 __pycache__/
 seller_data_unique.xlsx
+credentials.json
+main_email.json

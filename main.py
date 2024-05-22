@@ -35,12 +35,15 @@ agents = EmailPersonalizationAgents()
 
 email_personalizer = agents.personalize_email_agent()
 ghostwriter = agents.ghostwriter_agent()
+email_response = agents.email_response_writer()
 
 # 2. Create tasks
 tasks = PersonalizeEmailTask()
 
 personalize_email_tasks = []
 ghostwrite_email_tasks = []
+
+draft_responses = tasks.draft_responses_task()
 
 # Path to the CSV file containing client information
 csv_file_path = 'clients_medium.csv'
@@ -84,11 +87,13 @@ with open(csv_file_path, mode='r', newline='') as file:
 crew = Crew(
     agents=[
         email_personalizer,
-        ghostwriter
+        ghostwriter,
+        email_response
     ],
     tasks=[
         *personalize_email_tasks,
-        *ghostwrite_email_tasks
+        *ghostwrite_email_tasks,
+        draft_responses
     ],
     max_rpm=29
 )

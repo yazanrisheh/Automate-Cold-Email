@@ -48,3 +48,26 @@ class PersonalizeEmailTask():
             output_file=f"output/{recipient['first_name']}_{recipient['last_name']}.txt",
             human_input = False
         )
+    
+    def draft_responses_task(self, agent):
+        return Task(
+            description = ("""Based on the action-required emails identified, draft responses for each.
+                            Ensure that each response is tailored to address the specific needs and context outlined
+                            in the email.
+                           
+                           - Assume the persona of the user and mimic the communication style in the threads if necessary.
+                           - Feel free to do research on the topic to provide a more detailed response, IF necessary.
+                           - IF research is necessary, do it BEFORE drafting the response.
+                           - If you need to pull the thread again, do it using only the actual Thread ID.
+                           
+                           Use the tool provided to draft each of the responses. When using the tool, pass the following input:
+                           - to (sender to be responded)
+                           - subject
+                           - message
+
+                           You MUST create all drafts before sending your final answer.
+                           Your final answer must be a confirmation that all responses have been drafted.
+                           """),
+                           agent = agent,
+                           
+                           )
